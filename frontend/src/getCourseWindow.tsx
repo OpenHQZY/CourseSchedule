@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Dialog, Typography } from "@mui/material";
 import { Course } from "./types";
 import { useEffect, useState } from "react";
 import Download from "./download";
@@ -49,31 +49,59 @@ export default function GetCourseWindow({ course, setSelectedCourse, setErrorMes
                 alignItems: "center",
                 justifyContent: "center",
             }}>
-                <Typography sx={{
+                {code ? <><Typography sx={{
                     color: "var(--primary-100)",
                     fontSize: "20px",
                     fontWeight: "bold",
                 }}>{course.name}</Typography>
-                <Typography sx={{
-                    color: "var(--text-100)",
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                }}>{code}</Typography>
-                <Button variant="contained" onClick={() => {
-                    navigator.clipboard.writeText(code);
-                    setErrorMessage("复制成功");
-                }}
-                    sx={{
-                        marginTop: "20px",
-                        bgcolor: "var(--primary-100)",
+                    <Typography sx={{
                         color: "var(--text-100)",
-                        "&:hover": {
-                            bgcolor: "var(--primary-200)",
-                        },
+                        fontSize: "13px",
+                        fontWeight: "bold",
                     }}
-                >复制口令</Button>
+                    id="code">{code}</Typography>
+                    <Button variant="contained" onClick={() => {
+                        setErrorMessage("您的设备不支持一键复制 请手动选择");
+                        const codeElement = document.getElementById("code");
+                        if (codeElement) {
+                            const selection = document.createRange();
+                            selection.selectNodeContents(codeElement);
+                            const selectionRange = window.getSelection();
+                            if (selectionRange) {
+                                selectionRange.removeAllRanges();
+                                selectionRange.addRange(selection);
+                            }
+                        }
+                        navigator.clipboard.writeText(code).then(() => {
+                            setErrorMessage("复制成功");
+                            const selectionRange = window.getSelection();
+                            if (selectionRange) {
+                                selectionRange.removeAllRanges();
+                            }
+                        }).catch(error => {
+                            setErrorMessage(error);
+                        });
+                    }}
+                        sx={{
+                            marginTop: "20px",
+                            bgcolor: "var(--primary-100)",
+                            color: "var(--text-100)",
+                            "&:hover": {
+                                bgcolor: "var(--primary-200)",
+                            },
+                        }}
+                    >复制口令</Button>
 
-                <Download />
+                    <Download /> </> : <>
+                    <Typography sx={{
+                        color: "var(--text-100)",
+                        fontSize: "16px",
+                        marginTop: "10px",
+                    }}>
+                        生成中，请稍候...
+                    </Typography>
+                    <CircularProgress sx={{ marginTop: "20px", color: "var(--primary-100)" }} />
+                </>}
             </Box>
         </Dialog>
     )

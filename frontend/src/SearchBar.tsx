@@ -68,7 +68,6 @@ export default function SearchBar(
                 <div className="darkBorderBg"></div>
 
                 <div className="white"></div>
-
                 <div className="border"></div>
 
                 <div id="main">

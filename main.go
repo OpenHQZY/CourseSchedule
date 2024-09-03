@@ -3,14 +3,15 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/go-resty/resty/v2"
 	"io"
 	"os"
 	"path/filepath"
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/go-resty/resty/v2"
 )
 
 var courseList []string

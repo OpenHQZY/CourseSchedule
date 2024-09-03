@@ -21,7 +21,7 @@
 .darkBorderBg,
 .glow {
     max-height: 70px;
-    max-width: 314px;
+    max-width: 280px;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -34,7 +34,7 @@
 .input {
     background-color: var(--bg-300);
     border: none;
-    width: 301px;
+    width: 200px;
     height: 56px;
     border-radius: 10px;
     color: var(--primary-200);
@@ -76,7 +76,7 @@
 
 .white {
     max-height: 63px;
-    max-width: 307px;
+    max-width: 280px;
     border-radius: 10px;
     filter: blur(2px);
 }
@@ -100,7 +100,7 @@
 
 .border {
     max-height: 59px;
-    max-width: 303px;
+    max-width: 280px;
     border-radius: 11px;
     filter: blur(0.5px);
 }
@@ -130,7 +130,7 @@
 
 .darkBorderBg {
     max-height: 60px;
-    max-width: 420px;
+    max-width: 320px;
 }
 
 .darkBorderBg::before {

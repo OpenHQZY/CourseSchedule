@@ -8,7 +8,8 @@ import Notice from "./Notice"
 import Autor from "./autor"
 
 const StyledImage = styled.img`
-    height: 30vh;
+    height: 26vh;
+    padding-bottom: 10px;
 `
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginTop: "10vh",
+            marginTop: "5vh",
             width: "100%",
         }}>
             <Snackbar
@@ -46,7 +47,7 @@ function App() {
                 message={errorMessage}
             />
             <StyledImage src="https://cdn1.d5v.cc/CDN/Image/hq.png"/>
-            <Typography variant="h1" fontSize={50} color="var(--primary-100)" fontWeight={"bold"}>
+            <Typography variant="h1" fontSize={38} color="var(--primary-100)" fontWeight={"bold"}>
                 湖汽课表
             </Typography>
             <SearchBar setCourseList={setCourseList} setErrorMessage={setErrorMessage}/>
