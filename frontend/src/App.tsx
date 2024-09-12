@@ -1,14 +1,14 @@
 import {Container, Snackbar, Typography} from "@mui/material"
 import styled from "@emotion/styled"
 import SearchBar from "./SearchBar"
-import {Course, Response} from "./types"
+import {Response, Course} from "./types"
 import {useEffect, useState} from "react"
 import CourseList from "./CourseList"
 import Notice from "./Notice"
 import Autor from "./autor"
 
 const StyledImage = styled.img`
-    height: 26vh;
+    height: 22vh;
     padding-bottom: 10px;
 `
 
@@ -55,7 +55,7 @@ function App() {
                                                   setErrorMessage={(msg: string | null) => setErrorMessage(msg ?? "")}/>}
             {notice !== "" && <Notice notice={notice}/>}
 
-            <Autor/>
+            <Autor show={courseList.length === 0}/>
         </Container>
     )
 }

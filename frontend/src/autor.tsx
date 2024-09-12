@@ -1,16 +1,11 @@
 import { Box, Button, Container, Typography } from '@mui/material';
 
-export default function Footer() {
-    return (
+export default function Footer({show}: {show: boolean}) {
+    return show && (
         <Box
             component="footer"
             sx={{
-                py: 3,
-                px: 2,
-                mt: 'auto',
-                position: 'fixed',
-                bottom: 0,
-                width: '100%',
+                marginTop: "20px",
             }}
         >
             <Container maxWidth="sm" sx={{ textAlign: 'center' }}>

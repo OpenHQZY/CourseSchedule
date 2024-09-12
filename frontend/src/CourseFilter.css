@@ -1,0 +1,22 @@
+.ant-select-selector {
+    background: var(--bg-100) !important;
+    border-color: var(--primary-100) !important;
+}
+
+.ant-select-selection-item {
+    color: var(--text-100);
+}
+
+.ant-select-dropdown {
+    background: var(--bg-100) !important;
+
+    & div {
+        color: var(--text-100) !important;
+
+    }
+}
+
+.ant-select-item-option-selected {
+    background: var(--primary-100) !important;
+    color: var(--text-100) !important;
+}

@@ -1,22 +1,26 @@
-import { Box, Button, CircularProgress, Dialog, Typography } from "@mui/material";
-import { Course } from "./types";
-import { useEffect, useState } from "react";
+import {Box, Button, ButtonGroup, CircularProgress, Dialog, Typography} from "@mui/material";
+import {Course} from "./types";
+import {useEffect, useState} from "react";
 import Download from "./download";
 
-export default function GetCourseWindow({ course, setSelectedCourse, setErrorMessage }:
-    { course: Course, setSelectedCourse: (course: Course | null) => void, setErrorMessage: (message: string | null) => void }) {
+export default function GetCourseWindow({course, setSelectedCourse, setErrorMessage}:
+                                            {
+                                                course: Course,
+                                                setSelectedCourse: (course: Course | null) => void,
+                                                setErrorMessage: (message: string | null) => void
+                                            }) {
 
     const [code, setCode] = useState<string>("");
 
     useEffect(() => {
-        if (course !== null && course.name !== "") {
+        if (course !== null && course.class_name !== "") {
             fetch("/api/get_code", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    keyword: course.name,
+                    keyword: course.class_name,
                 }),
             })
                 .then(response => response.json())
@@ -31,7 +35,7 @@ export default function GetCourseWindow({ course, setSelectedCourse, setErrorMes
                     setErrorMessage(error);
                 });
         }
-    }, [course]);
+    }, [course, setErrorMessage]);
 
     return (
         <Dialog open={course !== null} onClose={() => setSelectedCourse(null)} sx={{
@@ -53,13 +57,13 @@ export default function GetCourseWindow({ course, setSelectedCourse, setErrorMes
                     color: "var(--primary-100)",
                     fontSize: "20px",
                     fontWeight: "bold",
-                }}>{course.name}</Typography>
+                }}>{course.class_name}</Typography>
                     <Typography sx={{
                         color: "var(--text-100)",
                         fontSize: "13px",
                         fontWeight: "bold",
                     }}
-                    id="code">{code}</Typography>
+                                id="code">{code}</Typography>
                     <Button variant="contained" onClick={() => {
                         setErrorMessage("您的设备不支持一键复制 请手动选择");
                         const codeElement = document.getElementById("code");
@@ -82,17 +86,66 @@ export default function GetCourseWindow({ course, setSelectedCourse, setErrorMes
                             setErrorMessage(error);
                         });
                     }}
-                        sx={{
-                            marginTop: "20px",
-                            bgcolor: "var(--primary-100)",
-                            color: "var(--text-100)",
-                            "&:hover": {
-                                bgcolor: "var(--primary-200)",
-                            },
-                        }}
+                            sx={{
+                                marginTop: "20px",
+                                bgcolor: "var(--primary-100)",
+                                color: "var(--text-100)",
+                                "&:hover": {
+                                    bgcolor: "var(--primary-200)",
+                                },
+                            }}
                     >复制口令</Button>
 
-                    <Download /> </> : <>
+                    <Download/>
+                    <Typography
+                        sx={{
+                            paddingBottom: "10px"
+                        }}>下载WakeUp课程表
+                    </Typography>
+                    <ButtonGroup sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        borderRadius: "10px",
+                    }}>
+                        <Button
+                            variant="contained"
+                            sx={{
+                                bgcolor: "var(--primary-100)",
+                                color: "var(--text-100)",
+                                "&:hover": {
+                                    bgcolor: "var(--primary-200)",
+                                },
+                            }}
+                            onClick={() => window.open('https://cdn1.d5v.cc/CDN/Project/Course/wakeup.apk')}
+                        >安卓
+                        </Button>
+                        <Button
+                            variant="contained"
+                            sx={{
+                                bgcolor: "var(--primary-100)",
+                                color: "var(--text-100)",
+                                "&:hover": {
+                                    bgcolor: "var(--primary-200)",
+                                },
+                            }}
+                            onClick={() => window.open('appmarket://details?id=com.suda.yzune.wakeupschedule.hmos')}>
+                            鸿蒙
+                        </Button>
+                        <Button
+                            variant="contained"
+                            sx={{
+                                bgcolor: "var(--primary-100)",
+                                color: "var(--text-100)",
+                                "&:hover": {
+                                    bgcolor: "var(--primary-200)",
+                                },
+                            }}
+                            onClick={() => window.open('https://apps.apple.com/cn/app/wakeup%E8%AF%BE%E7%A8%8B%E8%A1%A8/id1553402284')}
+                        >IOS
+                        </Button>
+                    </ButtonGroup>
+                </> : <>
                     <Typography sx={{
                         color: "var(--text-100)",
                         fontSize: "16px",
@@ -100,8 +153,9 @@ export default function GetCourseWindow({ course, setSelectedCourse, setErrorMes
                     }}>
                         生成中，请稍候...
                     </Typography>
-                    <CircularProgress sx={{ marginTop: "20px", color: "var(--primary-100)" }} />
+                    <CircularProgress sx={{marginTop: "20px", color: "var(--primary-100)"}}/>
                 </>}
+
             </Box>
         </Dialog>
     )
