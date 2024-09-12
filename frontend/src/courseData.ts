@@ -4670,7 +4670,7 @@ function Search(keyword: string, options: Course) {
             continue;
         }
         if (Coursers[i].class_name.includes(keyword)
-            || Coursers[i].counselor.includes(keyword)
+            || Coursers[i].major.includes(keyword)
         ) {
             result.push(Coursers[i]);
         }
