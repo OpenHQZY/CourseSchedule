@@ -76,7 +76,7 @@ export default function SearchBar(
 
                     <div id="main">
                         <input
-                            placeholder="搜索课表..."
+                            placeholder="输入班级或专业..."
                             type="text"
                             name="text"
                             className="input"
@@ -139,6 +139,9 @@ export default function SearchBar(
                         bgcolor: "var(--primary-200)",
                     },
                 }} onClick={() => {
+                    if (search.trim() == "") {
+                        setErrorMessage("请输入班级或专业.")
+                    }
                     setCourseList([]);
                     handleSubmit();
                 }}>搜索</Button>
