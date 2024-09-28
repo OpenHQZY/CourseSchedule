@@ -180,9 +180,9 @@ for tr in trs:
                 if "]" in tds[9].text.strip()
                 else tds[9].text.strip()
             )
-            for i in iconMap.keys():
-                if i in c.class_name or i in c.major:
-                    c.icon = i
+            for j in iconMap.keys():
+                if j in c.class_name or j in c.major:
+                    c.icon = j
             if c.icon is None:
                 c.icon = "其他"
 

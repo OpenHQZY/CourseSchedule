@@ -12,6 +12,6 @@ export default function Download() {
         <img src="https://cdn1.d5v.cc/CDN/Project/Course/res.png" style={{
             height: "100%",
             width: "100%",
-        }}></img>
+        }} alt={"示例"}></img>
     </Box>
 }
