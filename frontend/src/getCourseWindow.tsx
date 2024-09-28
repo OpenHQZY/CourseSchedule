@@ -45,6 +45,7 @@ export default function GetCourseWindow({course, setSelectedCourse, setErrorMess
                 borderRadius: "10px",
                 color: "var(--text-100)",
                 width: "80%",
+                overflowY: "auto"
             }
         }}>
             <Box sx={{
@@ -58,6 +59,18 @@ export default function GetCourseWindow({course, setSelectedCourse, setErrorMess
                     fontSize: "20px",
                     fontWeight: "bold",
                 }}>{course.class_name}</Typography>
+                    <Typography sx={{
+                        color: "var(--primary-200)",
+                        display: "flex",
+                        textAlign: "center",
+                        fontSize: "13px"
+                    }}>
+                        {course.department}
+                        <br />
+                        {course.major}
+                        <br />
+                        {course.counselor}
+                    </Typography>
                     <Typography sx={{
                         color: "var(--text-100)",
                         fontSize: "13px",
@@ -77,7 +90,7 @@ export default function GetCourseWindow({course, setSelectedCourse, setErrorMess
                             }
                         }
                         navigator.clipboard.writeText(code).then(() => {
-                            setErrorMessage("复制成功");
+                            setErrorMessage("复制成功, 快去WakeUp导入吧!");
                             const selectionRange = window.getSelection();
                             if (selectionRange) {
                                 selectionRange.removeAllRanges();

@@ -34,11 +34,12 @@ export default function SearchBar(
         }
         console.log(search, options)
 
-        let res = Search(search, options)
+        const res = Search(search, options)
         if (res.length == 0) {
             setErrorMessage("未找到班级")
         } else {
             setCourseList(res)
+            setErrorMessage(`找到 ${res.length} 个课表`)
         }
 
     };

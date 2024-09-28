@@ -7,7 +7,7 @@ export default function Download() {
         marginTop: "20px",
         alignItems: "center",
         justifyContent: "center",
-        height: "60vh",
+        height: "350px",
     }}>
         <img src="https://cdn1.d5v.cc/CDN/Project/Course/res.png" style={{
             height: "100%",

@@ -45,14 +45,14 @@ export default function CourseList({courseList, setErrorMessage}:
                         {course.class_name}
                     </Typography>
                     <Typography fontSize={15} color="var(--text-200)">
-                        {course.department} - {course.major} - {course.counselor}
+                        {course.department}
                     </Typography>
                 </Box>
                 <Button variant="contained" color="primary" sx={{
                     color: "var(--text-100)",
                     bgcolor: "var(--primary-100)",
                 }} onClick={() => setSelectedCourse(course)}>
-                    获取课表
+                    获取
                 </Button>
             </Box>
         )
