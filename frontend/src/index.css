@@ -27,3 +27,18 @@ body {
 a {
     color: var(--primary-100);
 }
+
+
+.css-1abvrni-MuiButtonBase-root-MuiButton-root {
+    background-color: var(--primary-100) !important;
+    color: var(--text-100) !important;
+}
+
+.css-1btmbba-MuiButtonBase-root-MuiButton-root {
+    background-color: var(--primary-100) !important;
+    color: var(--text-100) !important;
+}
+
+.css-1btmbba-MuiButtonBase-root-MuiButton-root:hover {
+    background-color: var(--accent-200) !important;
+}

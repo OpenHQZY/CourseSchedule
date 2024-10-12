@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Button, TextField, Typography, Box } from '@mui/material';
 
 function CheckLogin() {
     fetch("/api/check", {
@@ -19,14 +20,15 @@ export default function Admin() {
         CheckLogin();
     }, [])
 
-    return <>
-        <SetNotice />
-        <hr />
-
-        <AddData />
-        <hr />
-        <DataFiles />
-    </>
+    return (
+        <Box>
+            <SetNotice />
+            <hr />
+            <AddData />
+            <hr />
+            <DataFiles />
+        </Box>
+    );
 }
 
 function SetNotice() {
@@ -41,21 +43,17 @@ function SetNotice() {
             },
             body: JSON.stringify({ notice: (document.getElementById('notice') as HTMLInputElement).value })
         }).then(response => {
-            if (response.ok) {
-                setOk(true);
-            } else {
-                setOk(false);
-            }
+            setOk(response.ok);
         })
     }
 
-    return <div style={{
-        display: "flex"
-    }}>
-        <button onClick={handleSetNotice}>设置公告</button>
-        <input type="text" id="notice" />
-        {ok && <p>设置成功</p>}
-    </div>
+    return (
+        <Box display="flex" alignItems="center">
+            <TextField id="notice" label="公告" variant="outlined" />
+            <Button variant="contained" color="primary" onClick={handleSetNotice}>设置公告</Button>
+            {ok && <Typography color="success.main">设置成功</Typography>}
+        </Box>
+    );
 }
 
 function AddData() {
@@ -77,20 +75,14 @@ function AddData() {
             body: formData
         });
 
-        if (response.ok) {
-            alert("文件上传成功");
-        } else {
-            alert("文件上传失败");
-        }
+        alert(response.ok ? "文件上传成功" : "文件上传失败");
     }
 
     return (
-        <div>
+        <Box>
             <input type="file" multiple id="upload-data" />
-            <button onClick={() => {
-                handleFileUpload();
-            }}>上传文件</button>
-        </div>
+            <Button variant="contained" color="primary" onClick={handleFileUpload}>上传文件</Button>
+        </Box>
     );
 }
 
@@ -118,9 +110,8 @@ function DataFiles() {
             if (response.ok) {
                 setFiles(files.filter(f => f !== file));
             }
-        }
-        )
-    }   
+        })
+    }
 
     const handleRefresh = async () => {
         fetch("/api/data", {
@@ -133,7 +124,7 @@ function DataFiles() {
             })
     }
 
-    const handleCLean = async () => {
+    const handleClean = async () => {
         fetch("/api/clean", {
             method: 'DELETE',
             headers: {
@@ -146,11 +137,16 @@ function DataFiles() {
         })
     }
 
-    return <div>
-        <>
-            <button onClick={() => {handleCLean()} }>清空</button>
-            <button onClick={() => {handleRefresh()}}>刷新</button>
-        </>
-        {files.map(file => <p>{file} <button onClick={() => handleDelete(file)}>删除</button></p>)}
-    </div>
+    return (
+        <Box>
+            <Button variant="outlined" color="primary" onClick={handleClean}>清空</Button>
+            <Button variant="outlined" color="primary" onClick={handleRefresh}>刷新</Button>
+            {files.map(file => (
+                <Box key={file} display="flex" justifyContent="space-between" alignItems="center">
+                    <Typography>{file}</Typography>
+                    <Button variant="outlined" color="primary" onClick={() => handleDelete(file)}>删除</Button>
+                </Box>
+            ))}
+        </Box>
+    );
 }
