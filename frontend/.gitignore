@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 /dist.zip
+pnpm-lock.yaml
+tsconfig.app.tsbuildinfo
+tsconfig.node.tsbuildinfo
