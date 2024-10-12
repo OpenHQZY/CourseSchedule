@@ -1,6 +1,7 @@
 package main
 
 import (
+	"GoHQCourse/admin"
 	"flag"
 	"fmt"
 	"io"
@@ -186,14 +187,8 @@ func main() {
 	})
 
 	api := app.Group("/api")
+	admin.RegisterAdminRoutes(app)
 
-	api.GET("/notice", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"code":    200,
-			"message": "ok",
-			"data":    notice,
-		})
-	})
 	api.POST("/get_code", getCourseCode)
 
 	app.Static("/assets", "dist/assets")
@@ -205,10 +200,7 @@ func main() {
 	}
 }
 
-var notice string
-
 func init() {
-	flag.StringVar(&notice, "notice", "", "设置公告")
 	flag.IntVar(&port, "port", 5001, "设置端口")
 	flag.Parse()
 
@@ -226,4 +218,5 @@ func init() {
 			}
 		}
 	}
+
 }
